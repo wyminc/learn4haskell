@@ -311,7 +311,7 @@ True
 >>> True && False
 False
 >>> 10 < 20 || 20 < 5
-False
+True
 >>> 2 ^ 10  -- power
 1024
 >>> not False
