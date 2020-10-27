@@ -22,6 +22,10 @@ cabal.project.local
 .ghc.environment.*
 .HTF/
 .hie/
+
+# Nix
+*.nix
+
 # Stack
 .stack-work/
 stack.yaml.lock
