@@ -478,7 +478,7 @@ Implement a function that returns the last digit of a given number.
 -}
 -- DON'T FORGET TO SPECIFY THE TYPE IN HERE
 lastDigit :: Int -> Int
-lastDigit n = mod n 10
+lastDigit n = mod (abs n) 10
 
 
 {- |
@@ -508,12 +508,10 @@ branches because it is an expression and it must always return some value.
   satisfying the check will be returned and, therefore, evaluated.
 -}
 closestToZero :: Int -> Int -> Int
-closestToZero x y = if absx > absy
-  then y
-  else x
-  where
-    absx = abs x
-    absy = abs y
+closestToZero x y =
+  if abs x  > abs y
+    then y
+    else x
 
 
 {- |
@@ -636,17 +634,12 @@ Try to introduce variables in this task (either with let-in or where) to avoid
 specifying complex expressions.
 -}
 sumLast2 :: Int -> Int
-sumLast2 n = secondToTheLastDigit n + lastDigit n
+sumLast2 n =
+  if first > 9
+    then mod (abs first) 10 + second
+    else first + second
   where
-    lastDigit :: Int -> Int
-    lastDigit a = mod a 10
-
-    secondToTheLastDigit :: Int -> Int
-    secondToTheLastDigit b
-        | intermediateNumber > 9 =  mod intermediateNumber 10
-        | otherwise = intermediateNumber
-        where intermediateNumber = div b 10
-
+    (first, second) = divMod (abs n) 10
 
 {- |
 =💣= Task 10*
@@ -667,9 +660,15 @@ aren't ready for this boss yet!
 -}
 firstDigit :: Int -> Int
 firstDigit n
-    | numberCheck == 0 = n
+    | numberCheck == 0 = abs n
     | otherwise = firstDigit numberCheck
-    where numberCheck = div n 10
+    where numberCheck = div (abs n) 10
+
+-- firstDigit :: Int -> Int
+-- firstDigit n
+--     | numberCheck == 0 = n
+--     | otherwise = if n < 0 then firstDigit (-numberCheck) else firstDigit numberCheck
+--     where numberCheck = div (abs n) 10
 
 
 {-
