@@ -877,6 +877,7 @@ list.
 rotate :: Int -> [a] -> [a]
 rotate coeff list
     | coeff < 0 = []
+    | listLength == 0 = []
     | coeff > listLength = rotate (coeff - listLength) list
     | otherwise = drop coeff list ++ take coeff list
     where listLength = length list
