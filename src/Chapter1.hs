@@ -550,6 +550,9 @@ mid x y z
     | x < y && y < z = y
     | x > y && x < z = x
     | x < y && x > z = x
+    | x == y = min x z
+    | y == z = min x y
+    | x == z = min y z
     | otherwise = z
 {- |
 =⚔️= Task 8
