@@ -339,7 +339,6 @@ subList :: Int -> Int -> [a] -> [a]
 subList x y list
     | x < 0 || y < 0 || x == 0 || y == 0 = []
     | otherwise = take (y + 1 - x) (drop x list)
-    -- | otherwise = reverse (drop (y-1) (reverse (drop x list)))
 
 {- |
 =⚔️= Task 4
