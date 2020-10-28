@@ -337,7 +337,7 @@ ghci> :l src/Chapter2.hs
 -}
 subList :: Int -> Int -> [a] -> [a]
 subList x y list
-    | x < 0 || y < 0 || x == 0 || y == 0 = []
+    | x < 0 || y < 0 || y == 0 && x /= 0 = []
     | otherwise = take (y + 1 - x) (drop x list)
 
 {- |
@@ -505,7 +505,7 @@ False
 -}
 isThird42 :: [Int] -> Bool
 isThird42 list =
-  case  reverse (take 3 list) of
+  length list >= 3 && case  reverse (take 3 list) of
     (42 : _) -> True
     _        -> False
 
@@ -875,10 +875,11 @@ list.
 🕯 HINT: Use the 'cycle' function
 -}
 rotate :: Int -> [a] -> [a]
-rotate coeff list =
-  if coeff < 0
-    then []
-    else drop coeff list ++ take coeff list
+rotate coeff list
+    | coeff < 0 = []
+    | coeff > listLength = rotate (coeff - listLength) list
+    | otherwise = drop coeff list ++ take coeff list
+    where listLength = length list
 
 {- |
 =💣= Task 12*
